@@ -37,6 +37,6 @@ int main()
     arr.length=n;
 */
     display(arr);
-
+    std::cout << std::endl;
     return 0;
 }

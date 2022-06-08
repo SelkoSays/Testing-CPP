@@ -48,6 +48,6 @@ int main() {
     reverse(arr,arr_size);
     for (auto i: arr)
         std::cout << i << " ";
-    
+    std::cout << std::endl;
     return 0;
 }
