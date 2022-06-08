@@ -3,7 +3,8 @@
 
 struct Array
 {
-    int *A;
+    //int *A;
+    int A[20];
     int size;
     int length;
 };
@@ -18,7 +19,8 @@ void display(Array arr)
 
 int main()
 {
-    struct Array arr;
+    struct Array arr = {{2,3,4,5,6},20,5};
+/*
     int n{};
     std::cout << "Enter size of an array: ";
     std::cin >> arr.size;
@@ -33,7 +35,7 @@ int main()
         std::cin >> arr.A[i];
 
     arr.length=n;
-
+*/
     display(arr);
 
     return 0;
