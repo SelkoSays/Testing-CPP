@@ -14,7 +14,8 @@ void reverse(std::vector<T> *vec)
     }
 }
 
-void reverse(int* array, int arr_size)
+template <typename T>
+void reverse(T* array, int arr_size)
 {
     //std::cout << "Holla\n";
     for (size_t i = 0; i < arr_size/2;i++)
