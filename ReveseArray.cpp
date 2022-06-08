@@ -20,7 +20,7 @@ void reverse(T* array, int arr_size)
     //std::cout << "Holla\n";
     for (size_t i = 0; i < arr_size/2;i++)
     {
-        int temp = array[i];
+        auto temp = array[i];
         //std::cout << temp << std::endl;
         array[i] = array[arr_size-i-1];
         //std::cout << array[i] << std::endl;
