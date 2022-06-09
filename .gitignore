@@ -4,3 +4,5 @@ Builds
 build
 *.out
 .replit
+.vs/
+x64/
