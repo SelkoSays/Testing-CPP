@@ -33,7 +33,7 @@ Array::Array()
 
 Array::~Array()
 {
-
+	free(A);
 }
 
 void Array::display()
