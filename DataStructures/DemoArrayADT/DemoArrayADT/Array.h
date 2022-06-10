@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _ARRAY_H_
+#define _ARRAY_H_
 class Array
 {
 private:
@@ -22,3 +23,4 @@ private:
 	void swap(int* x, int* y);
 };
 
+#endif
