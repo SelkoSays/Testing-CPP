@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cstdlib>
+//#include <cstdlib>
 
 void Swap(int*,int*);
 
@@ -40,12 +40,13 @@ int Delete(struct Array* arr, int index)
 {
     if(index>=0 && index <= arr->length)
     {
-        auto x = arr->A[index];
+        int x = arr->A[index];
         for(int i = index; i < arr->length-1; i++)
             arr->A[i] = arr->A[i+1];
         arr->length--;
         return x;
     }
+    return -123456789;
 }
 
 void Swap(int* x, int* y)
