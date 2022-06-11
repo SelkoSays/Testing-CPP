@@ -76,7 +76,7 @@ int LinearSearch(const struct Array* const arr, int key)
 /**
  * Binary search using iteration
  *
- * @param ordered array, desired element of the array
+ * @param struct Array (sorted), desired element of the array
  * @return index of desired element,
  * or if not found returns -1
  */
@@ -99,12 +99,12 @@ int LBinSearch(struct Array arr, int key)
 
 	return -1;
 }
+
 /**
  * Binary search using recursion
  *
- * @param ordered array, inidex 0/start of the array, array.length-1, desired element of the array
- * @return index of desired element,
- * or if not found returns -1
+ * @param struct Array (sorted), inidex 0/start of the array, array.length-1, desired element of the array
+ * @return index of desired element, or if not found returns -1
  */
 int RBinSearch(int arr[], int low, int high, int key)
 {
@@ -303,9 +303,140 @@ void Rearrange(struct Array* arr)
 }
 
 
+struct Array* Merge(struct Array* arr1, struct Array* arr2)
+{
+	int i = 0, j = 0, k = 0;
+	//int m = arr1->length, n = arr2->length;
+	struct Array* arr3 = (struct Array*)malloc(sizeof(struct Array));
+	/*int* arr3;
+	arr3 = (int*)malloc((n + m) * sizeof(int));*/
+
+	while (i < arr1->length && j < arr2->length)
+	{
+		if (arr1->A[i] < arr2->A[j])
+			arr3->A[k++] = arr1->A[i++];
+		else
+			arr3->A[k++] = arr2->A[j++];
+	}
+	for (; i < arr1->length; i++)
+		arr3->A[k++] = arr1->A[i];
+	for (; j < arr2->length; j++)
+		arr3->A[k++] = arr2->A[j];
+	arr3->length = arr1->length + arr2->length;
+	arr3->size = 10;
+	//free(arr3);
+
+	return arr3;
+}
+
+struct Array* Union(struct Array* arr1, struct Array* arr2)
+{
+	struct Array* arr3 = (struct Array*)malloc(sizeof(struct Array));
+	int k = 0;
+	for (int i = 0; i < arr1->length; i++)
+		arr3->A[k++] = arr1->A[i];
+	for (int i = 0; i < arr2->length; i++)
+		if (LinearSearch(arr1, arr2->A[i]) == -1)
+			arr3->A[k++] = arr2->A[i];
+	arr3->length = k;
+	arr3->size = 10;
+	return arr3;
+}
+
+struct Array* UnionS(struct Array* arr1, struct Array* arr2)
+{
+	int i = 0, j = 0, k = 0;
+	//int m = arr1->length, n = arr2->length;
+	struct Array* arr3 = (struct Array*)malloc(sizeof(struct Array));
+	/*int* arr3;
+	arr3 = (int*)malloc((n + m) * sizeof(int));*/
+
+	while (i < arr1->length && j < arr2->length)
+	{
+		if (arr1->A[i] < arr2->A[j])
+			arr3->A[k++] = arr1->A[i++];
+		else if (arr2->A[j] < arr1->A[i])
+			arr3->A[k++] = arr2->A[j++];
+		else
+		{
+			arr3->A[k++] = arr1->A[i++];
+			j++;
+		}
+	}
+	for (; i < arr1->length; i++)
+		arr3->A[k++] = arr1->A[i];
+	for (; j < arr2->length; j++)
+		arr3->A[k++] = arr2->A[j];
+	arr3->length = k;
+	arr3->size = 10;
+	//free(arr3);
+
+	return arr3;
+}
+
+struct Array* IntersectionS(struct Array* arr1, struct Array* arr2)
+{
+	int i = 0, j = 0, k = 0;
+	//int m = arr1->length, n = arr2->length;
+	struct Array* arr3 = (struct Array*)malloc(sizeof(struct Array));
+	/*int* arr3;
+	arr3 = (int*)malloc((n + m) * sizeof(int));*/
+
+	while (i < arr1->length && j < arr2->length)
+	{
+		if (arr1->A[i] < arr2->A[j])
+			i++;
+		else if (arr2->A[j] < arr1->A[i])
+			j++;
+		else if(arr1->A[i] == arr2->A[j])
+		{
+			arr3->A[k++] = arr1->A[i++];
+			j++;
+		}
+	}
+
+	arr3->length = k;
+	arr3->size = 10;
+	//free(arr3);
+
+	return arr3;
+}
+
+struct Array* DifferenceS(struct Array* arr1, struct Array* arr2)
+{
+	int i = 0, j = 0, k = 0;
+	//int m = arr1->length, n = arr2->length;
+	struct Array* arr3 = (struct Array*)malloc(sizeof(struct Array));
+	/*int* arr3;
+	arr3 = (int*)malloc((n + m) * sizeof(int));*/
+
+	while (i < arr1->length && j < arr2->length)
+	{
+		if (arr1->A[i] < arr2->A[j])
+			arr3->A[k++] = arr1->A[i++];
+		else if (arr2->A[j] < arr1->A[i])
+			j++;
+		else
+		{
+			i++;
+			j++;
+		}
+	}
+	for (; i < arr1->length; i++)
+		arr3->A[k++] = arr1->A[i];
+
+	arr3->length = k;
+	arr3->size = 10;
+	//free(arr3);
+
+	return arr3;
+}
+
 int main()
 {
-	struct Array arr = { {2,-3,25,10,-15,-7},10,6 };
+	struct Array arr1 = { {2, 6, 10, 15, 25}, 10, 5 };
+	struct Array arr2 = { {3, 6, 7, 15, 20}, 10, 5 };
+	struct Array* arr3;
 
 	//Insert(&arr,5,10);
 	//Append(&arr,10);
@@ -318,7 +449,9 @@ int main()
 	//std::cout << isSorted(arr) << std::endl;
 	//RRotate(&arr);
 	//Rearrange(&arr);
-	Display(arr);
+	//Display(arr);
+	arr3 = DifferenceS(&arr1, &arr2);
+	Display(*arr3);
 
 	std::cout << std::endl;
 	return 0;

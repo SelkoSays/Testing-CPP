@@ -34,6 +34,7 @@ Array::Array()
 Array::~Array()
 {
 	free(A);
+	delete A;
 }
 
 void Array::display()
