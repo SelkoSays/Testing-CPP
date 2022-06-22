@@ -6,17 +6,18 @@ void Swap(int*, int*);
 
 struct Array
 {
-	//int *A;
-	int A[20];
-	int size;
-	int length;
+	int* A;// = (int*)malloc(size * sizeof(int));
+	//int A[20];
+	int size{};
+	int length{};
 };
 
 void Display(struct Array arr)
 {
-	std::cout << "Elements are\n";
+	std::cout << "Elements are -> ";
 	for (int i = 0; i < arr.length; i++)
 		std::cout << arr.A[i] << " ";
+	std::cout << "\n";
 }
 
 void Append(struct Array* arr, int x)
@@ -434,24 +435,75 @@ struct Array* DifferenceS(struct Array* arr1, struct Array* arr2)
 
 int main()
 {
-	struct Array arr1 = { {2, 6, 10, 15, 25}, 10, 5 };
-	struct Array arr2 = { {3, 6, 7, 15, 20}, 10, 5 };
-	struct Array* arr3;
+	//struct Array arr1 = { {2, 6, 10, 15, 25}, 10, 5 };
+	//struct Array arr2 = { {3, 6, 7, 15, 20}, 10, 5 };
+	//struct Array* arr3;
 
-	//Insert(&arr,5,10);
-	//Append(&arr,10);
-	//std::cout << Delete(&arr,1) << std::endl;
-	//std::cout << RBinSearch(arr.A, 0,arr.length, 5) << std::endl;
-	//std::cout << Get(arr,9) << std::endl;
-	//Set(&arr, 0, 15);
-	//std::cout << Avg(arr) << std::endl;
-	//std::cout << std::boolalpha;
-	//std::cout << isSorted(arr) << std::endl;
-	//RRotate(&arr);
-	//Rearrange(&arr);
-	//Display(arr);
-	arr3 = DifferenceS(&arr1, &arr2);
-	Display(*arr3);
+	////Insert(&arr,5,10);
+	////Append(&arr,10);
+	////std::cout << Delete(&arr,1) << std::endl;
+	////std::cout << RBinSearch(arr.A, 0,arr.length, 5) << std::endl;
+	////std::cout << Get(arr,9) << std::endl;
+	////Set(&arr, 0, 15);
+	////std::cout << Avg(arr) << std::endl;
+	////std::cout << std::boolalpha;
+	////std::cout << isSorted(arr) << std::endl;
+	////RRotate(&arr);
+	////Rearrange(&arr);
+	////Display(arr);
+	//arr3 = DifferenceS(&arr1, &arr2);
+	//Display(*arr3);
+
+	Array arr1;
+	int ch{};
+	int x, index;
+
+	std::cout << "Enter size of an Array: ";
+	std::cin >> arr1.size;
+	arr1.A = (int*)malloc(arr1.size * sizeof(int));
+
+	do
+	{
+		std::cout << "\n\nMenu\n";
+		std::cout << "1. Insert\n";
+		std::cout << "2. Delete\n";
+		std::cout << "3. Search\n";
+		std::cout << "4. Sum\n";
+		std::cout << "5. Display\n";
+		std::cout << "6. Exit\n";
+
+		std::cout << "Enter your choice : ";
+		std::cin >> ch;
+		std::cout << "\n";
+
+		switch (ch)
+		{
+		case 1:
+			std::cout << "Enter an element and index: ";
+			std::cin >> x >> index;
+			Insert(&arr1, index, x);
+			break;
+		case 2:
+			std::cout << "Enter index: ";
+			std::cin >> index;
+			x = Delete(&arr1, index);
+			std::cout << "Deleted element is " << x << std::endl;
+			break;
+		case 3:
+			std::cout << "Enter element to search: ";
+			std::cin >> x;
+			index = LinearSearch(&arr1, x);
+			std::cout << "Element index is " << index;
+			break;
+		case 4:
+			std::cout << "Sum is " << LSum(arr1);
+			break;
+		case 5:
+			Display(arr1);
+			break;
+		}
+	} while (ch < 6);
+
 
 	std::cout << std::endl;
 	return 0;
