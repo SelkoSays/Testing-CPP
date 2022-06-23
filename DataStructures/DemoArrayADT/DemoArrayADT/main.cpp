@@ -9,6 +9,7 @@ int main()
 	arr.display();
 	arr.append(10);
 	arr.insert(0, 90);
+	arr.set(1, 2);
 	arr.display();
 
 	return 0;
